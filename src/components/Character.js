@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
 import OtherAPI from "./OtherAPI";
 
@@ -17,11 +17,12 @@ const Character = (prop) => {
   const [speciesApi, setSpeciesApi] = useState("");
 
   const {num} = prop;
-  const stateSetter = (num) => {
+  useEffect(() => {
+  const stateSetter = () => {
     axios
-      .get(`https://swapi.dev/api/${num}`)
+      .get(`https://swapi.dev/api/people/${num}`)
       .then((res) => {
-        setName(res.name);
+        setName(res.name); 
         setHeight(res.height);
         setHairColor(res.hair_color);
         setSkinColor(res.skin_color);
@@ -34,8 +35,8 @@ const Character = (prop) => {
       })
       .catch((err) => console.error(err));
   };
-
-  stateSetter(num);
+  stateSetter();
+  },[num])
 
   return (
     <div>
