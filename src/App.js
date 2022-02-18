@@ -41,4 +41,24 @@ In this challenge you will create a web page that presents a styled list of char
 - Schedule time to review and polish your work, including spell-checking and grammar-checking.
 - It is better to submit a challenge that meets MVP than one that attempts too much and does not.
 
+
+API DATA:
+  - 82 count
+  - 9 pages
+  n=1
+  while n < 83
+  /api/people/${n}
+
+  name ""
+  height ""
+  mass ""
+  hair_color ""
+  skin_color ""
+  eye_color ""
+  birth_year ""
+  gender ""
+  homeworld "api"
+  films [api..]
+  species [api]
+
 */

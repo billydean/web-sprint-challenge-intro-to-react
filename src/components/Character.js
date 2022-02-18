@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import OtherAPI from "./OtherAPI";
 import Planet from "./Planet";
 import Species from "./Species";
 import Film from "./Film";
 
 // Write your Character component here
 
-
-
 const Character = (prop) => {
-
   const [name, setName] = useState("");
   const [height, setHeight] = useState("");
-  const [mass, setMass] = useState("");
   const [hair, setHairColor] = useState("");
   const [skin, setSkinColor] = useState("");
   const [eye, setEyeColor] = useState("");
@@ -20,30 +17,51 @@ const Character = (prop) => {
   const [gender, setGender] = useState("");
   const [planetApi, setPlanetApi] = useState("");
   const [filmApi, setFilmApi] = useState([]);
-  const [speciesApi, setSpeciesApi] = useState([]);
+  const [speciesApi, setSpeciesApi] = useState("");
 
-    const num = prop;
-    const stateSetter = (num) => {
-    axios.get(`https://swapi.dev/api/${num}`)
-        .then(res => {
-            setName(res.name);
-            setHeight(res.height);
-            setMass(res.mass);
-            setHairColor(res.hair_color);
-            setSkinColor(res.skin_color);
-            setEyeColor(res.eye_color);
-            setBirthYear(res.birth_year);
-            setGender(res.gender);
-            setPlanetApi(res.homeworld);
-            setFilmApi(res.films);
-            setSpeciesApi(res.species);
-        })
-        .catch(err => console.error(err))
-    
+  const num = prop;
+  const stateSetter = (num) => {
+    axios
+      .get(`https://swapi.dev/api/${num}`)
+      .then((res) => {
+        setName(res.name);
+        setHeight(res.height);
+        setHairColor(res.hair_color);
+        setSkinColor(res.skin_color);
+        setEyeColor(res.eye_color);
+        setBirthYear(res.birth_year);
+        setGender(res.gender);
+        setPlanetApi(res.homeworld);
+        setFilmApi(res.films);
+        setSpeciesApi(res.species[0]);
+      })
+      .catch((err) => console.error(err));
+  };
 
+  stateSetter(num);
+
+  return (
+    <div>
+    <h2>{ name }</h2>
+    <div>
+        <div>
+            <div>
+                <p>{ birthYear }</p>
+                <p>{ gender }</p>
+                <p>{ height }</p>
+            </div>
+            <div>
+                <p>{ hair }</p>
+                <p>{ skin }</p>
+                <p>{ eye }</p>
+            </div>
+        </div>
+        <OtherAPI planetApi={ planetApi } filmApi={ filmApi } speciesApi={ speciesApi }/>
+    </div>
+    </div>
+  )
 };
-stateSetter(num);
-};
+
 
 export default Character;
 /*
@@ -73,14 +91,7 @@ API DATA:
   while n < 83
   /api/people/${n}
 
-planet: one of (swapi.dev/api/planets/#).population folks from ().name
 
-films: if one: appeared in the ().release_date.slice(0,5) film, (api/films/#).name
-        if more: appeared in ().name (().release_date.slice(0,5)) and...
-        if > 2: appeared in, , and...
-
-species: was a (api/species/#).name
-    if empty-- (api/species/1)
 
 
 
