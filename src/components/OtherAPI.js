@@ -1,15 +1,14 @@
 import React,{ useState, useEffect } from 'react';
-
-<OtherAPI planetApi={ planetApi } filmApi={ filmApi } speciesApi={ speciesApi }/>
-
+import axios from 'axios';
 
 const OtherAPI = (props) => {
-    const { planetApi, filmApi, speciesApi } = props;
+    const { planetApi, filmApi, speciesApi, gender } = props;
     const [planetName, setPlanetName] = useState("");
     const [planetPop, setPlanetPop] = useState("");
     const [filmDateArray, setFilmDateArray] = useState([]);
     const [filmNameArray, setFilmNameArray] = useState([]);
     const [speciesName, setSpeciesName] = useState("");
+    const [pronoun, setPronoun] = useState("");
 
     useEffect(() => {
     axios.get(`${planetApi}`)
@@ -29,9 +28,11 @@ const OtherAPI = (props) => {
     })
     axios.get(`${speciesApi}`)
         .then(res => {
-            setSpeciesName(res.name)
+            setSpeciesName(res.name);
         })
-        .catch(err => console.error(err))
+        .catch(()=>{
+            setSpeciesName("human");
+        })
 },[])
     let filmInfo = "";
     if (filmNameArray.length < 3) {
@@ -47,10 +48,19 @@ const OtherAPI = (props) => {
         filmInfo += `and ${filmNameArray[-1]} (${filmDateArray[-1]}).`
     }
 
+    if (gender === 'male') {
+        setPronoun("he");
+    } else if (gender === 'female') {
+        setPronoun("she");
+    } else {
+        setPronoun("they");
+    }
 
 
 return(
-    <div></div>
+    <div>
+        <p>One of { planetPop } { speciesName }s from { planetName }, { pronoun } appeared in { filmInfo }</p>
+    </div>
 )
 
 };
@@ -60,9 +70,6 @@ export default OtherAPI;
 /*
 planet: one of (swapi.dev/api/planets/#).population folks from ().name
 
-films: if one: appeared in the ().release_date.slice(0,5) film, (api/films/#).name
-        if more: appeared in ().name (().release_date.slice(0,5)) and...
-        if > 2: appeared in, , and...
 
 species: was a (api/species/#).name
     if empty-- (api/species/1)*/
