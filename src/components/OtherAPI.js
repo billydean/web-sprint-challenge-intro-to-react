@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react';
+import React,{ useState } from 'react';
 import axios from 'axios';
 
 const OtherAPI = (props) => {
@@ -10,7 +10,6 @@ const OtherAPI = (props) => {
     const [speciesName, setSpeciesName] = useState("");
     const [pronoun, setPronoun] = useState("");
 
-    useEffect(() => {
     axios.get(`${planetApi}`)
         .then(res => {
             setPlanetName(res.name);
@@ -26,14 +25,14 @@ const OtherAPI = (props) => {
             })
             .catch(err => console.error(err))
     })
-    axios.get(`${speciesApi}`)
+    if (speciesApi) {axios.get(`${speciesApi}`)
         .then(res => {
             setSpeciesName(res.name);
         })
-        .catch(()=>{
-            setSpeciesName("human");
-        })
-},[])
+        .catch(err=>console.error(err))
+    } else {
+        setSpeciesName("human");
+    }   
     let filmInfo = "";
     if (filmNameArray.length < 3) {
         if (filmNameArray.length > 1) {
@@ -63,13 +62,6 @@ return(
     </div>
 )
 
-};
+}
 
-export default OtherAPI;
-
-/*
-planet: one of (swapi.dev/api/planets/#).population folks from ().name
-
-
-species: was a (api/species/#).name
-    if empty-- (api/species/1)*/
+export default OtherAPI

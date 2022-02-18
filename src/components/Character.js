@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import OtherAPI from "./OtherAPI";
-import Planet from "./Planet";
-import Species from "./Species";
-import Film from "./Film";
 
 // Write your Character component here
 
@@ -19,7 +16,7 @@ const Character = (prop) => {
   const [filmApi, setFilmApi] = useState([]);
   const [speciesApi, setSpeciesApi] = useState("");
 
-  const num = prop;
+  const {num} = prop;
   const stateSetter = (num) => {
     axios
       .get(`https://swapi.dev/api/${num}`)
@@ -56,7 +53,7 @@ const Character = (prop) => {
                 <p>{ eye }</p>
             </div>
         </div>
-        <OtherAPI planetApi={ planetApi } filmApi={ filmApi } speciesApi={ speciesApi }/>
+        <OtherAPI planetApi={ planetApi } filmApi={ filmApi } speciesApi={ speciesApi } gender={ gender }/>
     </div>
     </div>
   )
