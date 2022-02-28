@@ -1,14 +1,35 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import './App.css';
 // import CharacterList component
 import CharacterList from "./components/CharacterList"
-// set up router in CharacterList
-import { BrowserRouter as Router } from 'react-router-dom';
 // import Search and Footer components
 import Search from './components/Search';
 import Footer from './components/Footer';
 
 const App = () => {
+  const [characters, setChars] = useState([]);
+  useEffect(()=>{
+    setChars([{
+      name: 'Chewbacca',
+      height: 'tall',
+      mass: 'heavy',
+      hair_color: 'brown',
+      skin_color: 'brown',
+      eye_color: 'brown',
+      gender: 'male',
+      url: 'https://swapi.dev/api/people/1/'
+    },    {name: 'Chewbacca',
+    height: 'tall',
+    mass: 'heavy',
+    hair_color: 'brown',
+    skin_color: 'brown',
+    eye_color: 'brown',
+    gender: 'male',
+    url: 'https://swapi.dev/api/people/2/'}]);
+
+  },[])
+  console.log(characters);
+
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
 
@@ -18,11 +39,11 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1 className="Header">Star Wars</h1>
+      <div className="Header">
+        <h1>Star Wars</h1>
+      </div>
       <Search />
-      <Router>
-        <CharacterList />
-      </Router>
+      <CharacterList characters={ characters }/>
       <Footer />
     </div>
   );
