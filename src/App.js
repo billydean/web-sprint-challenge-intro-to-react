@@ -5,30 +5,35 @@ import CharacterList from "./components/CharacterList"
 // import Search and Footer components
 import Search from './components/Search';
 import Footer from './components/Footer';
+// import uuid4
+import {v4 as uuid } from 'uuid';
 
 const App = () => {
   const [characters, setChars] = useState([]);
-  useEffect(()=>{
-    setChars([{
-      name: 'Chewbacca',
-      height: 'tall',
-      mass: 'heavy',
-      hair_color: 'brown',
-      skin_color: 'brown',
-      eye_color: 'brown',
-      gender: 'male',
-      url: 'https://swapi.dev/api/people/1/'
-    },    {name: 'Chewbacca',
+  const bucket = [{
+    name: 'Chewbacca',
     height: 'tall',
     mass: 'heavy',
     hair_color: 'brown',
     skin_color: 'brown',
     eye_color: 'brown',
-    gender: 'male',
-    url: 'https://swapi.dev/api/people/2/'}]);
+    gender: 'male'
+  },   
+   {name: 'Dewbacca',
+  height: 'tall',
+  mass: 'heavy',
+  hair_color: 'brown',
+  skin_color: 'brown',
+  eye_color: 'brown',
+  gender: 'male'}];
 
-  },[])
-  console.log(characters);
+  useEffect(()=>{
+    setChars(
+      bucket.map(ch => {
+      return {...ch, id: uuid()};
+  }));
+},[]);
+  
 
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.

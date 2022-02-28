@@ -11,7 +11,7 @@ const CharacterList = (props) => {
         <div className="container">
                 { characters.map((character, index) => {
                     console.log(character);
-                    return <Character char={character} key={index} />
+                    return <Character char={character} key={character.id} />
                     })}
         </div>
     )
