@@ -1,6 +1,7 @@
 import Character from './Character';
 // need Routes, React
 import React from 'react';
+import styled from 'styled-components';
 
 
 const CharacterList = (props) => {
