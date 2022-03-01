@@ -7,32 +7,20 @@ import Search from './components/Search';
 import Footer from './components/Footer';
 // import uuid4
 import {v4 as uuid } from 'uuid';
+// import axios
+import axios from 'axios';
 
 const App = () => {
   const [characters, setChars] = useState([]);
-  const bucket = [{
-    name: 'Chewbacca',
-    height: 'tall',
-    mass: 'heavy',
-    hair_color: 'brown',
-    skin_color: 'brown',
-    eye_color: 'brown',
-    gender: 'male'
-  },   
-   {name: 'Dewbacca',
-  height: 'tall',
-  mass: 'heavy',
-  hair_color: 'brown',
-  skin_color: 'brown',
-  eye_color: 'brown',
-  gender: 'male'}];
-
-  useEffect(()=>{
-    setChars(
-      bucket.map(ch => {
-      return {...ch, id: uuid()};
-  }));
-},[]);
+  axios.get(`https://swapi.dev/api/people`)
+    .then(response => {
+      setChars(
+        response.data.map(person => {
+          return {...person, id: uuid()};
+        })
+      )
+    })
+    .catch(err => console.error(err))
   
 
   // Try to think through what state you'll need for this app before starting. Then build out

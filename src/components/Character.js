@@ -18,7 +18,7 @@ const Name = styled.div`
         margin: 0;
         padding: .8rem 0 .5rem 0;
         text-transform: uppercase;
-        letter-spacing: 2vw;
+        letter-spacing: 1vw;
         color: #d9d2c9;
         text-shadow: 1px 1px 5px #2f3844, -1px -1px 5px #2f3844, 1px -1px 5px #2f3844, -1px 1px 5px #2f3844;
     }
