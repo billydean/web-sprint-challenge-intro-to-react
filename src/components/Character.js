@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Card = styled.div`
     background-color: #2f3844;
-    max-width: 80%;
+    width: 80%;
     margin: auto;
     border-radius: 15px;
     overflow: hidden;
