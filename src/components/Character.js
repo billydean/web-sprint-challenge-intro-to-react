@@ -14,8 +14,9 @@ const Name = styled.div`
     border-radius: 0px;
     margin: 0;
     & h3{
+        font-size: 1.8rem;
         margin: 0;
-        padding: 1vw 0 .5vw 0;
+        padding: .8rem 0 .5rem 0;
         text-transform: uppercase;
         letter-spacing: 2vw;
         color: #d9d2c9;
@@ -45,7 +46,7 @@ const Item = styled.li`
     font-size: 1rem;
     line-height: 100%;
     overflow-wrap: normal;
-    max-width: 50%;
+    min-width: 20%;
     list-style-type: none;
     & span{
         text-transform: capitalize;
@@ -58,6 +59,7 @@ const Flavor = styled.div`
     color: #d9d2c9;
     font-size: 1.2rem;
     font-style: italic;
+    min-width: 50%;
 `;
 
 const Character = (props) => {

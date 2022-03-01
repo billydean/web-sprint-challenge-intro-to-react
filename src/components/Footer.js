@@ -6,7 +6,7 @@ const FootBox = styled.footer`
     justify-content: flex-end;
     align-items: center;
     height: 2.5rem;
-    padding: 0 4% 0 0;
+    padding: 0 26vw 0 0;
     background-color: #d9d2c9;    
 `;
 const Contact = styled.a`
