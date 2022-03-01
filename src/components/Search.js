@@ -24,11 +24,14 @@ const Button = styled.button`
     }
 `
 
-const Search = () => {
+const Search = (props) => {
+    const changeHandler = event => {
+        props.setSearchTerm(event.target.value);
+    }
 
     return(
         <SearchBox>
-            <Field type="text" placeholder="Search..." name="search" />
+            <Field type="text" placeholder="Search..." name="search" onChange={changeHandler} />
             <Button type="submit"></Button>
         </SearchBox>
     )

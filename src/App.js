@@ -12,6 +12,8 @@ import axios from 'axios';
 
 const App = () => {
   const [characters, setChars] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
   axios.get(`https://swapi.dev/api/people`)
     .then(response => {
       setChars(
@@ -22,6 +24,13 @@ const App = () => {
     })
     .catch(err => console.error(err))
   
+    const getFiltered = () => {
+      const termNormalized = searchTerm.trim().toLowerCase();
+      if (!termNormalized) return characters;
+      return characters.filter(char => {
+        return char.name.toLowerCase().includes(termNormalized);
+      })
+    }
 
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
@@ -35,8 +44,8 @@ const App = () => {
       <div className="Header">
         <h1>Star Wars</h1>
       </div>
-      <Search />
-      <CharacterList characters={ characters }/>
+      <Search setSearchTerm={setSearchTerm} />
+      <CharacterList characters={ getFiltered() }/>
       <Footer />
     </div>
   );

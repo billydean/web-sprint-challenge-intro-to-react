@@ -1,6 +1,7 @@
 // Write your Character component here
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Card = styled.div`
     background-color: #2f3844;
@@ -61,10 +62,16 @@ const Flavor = styled.div`
     font-style: italic;
     min-width: 50%;
 `;
-
+const planet = (url) => {
+    axios.get(url)
+        .then(response => {
+            return response.data.name
+        })
+        .catch(err => console.error(err))
+}
 const Character = (props) => {
     const {char} = props;
-
+    
     return (
         <Card>
             <Name><h3>{ char.name }</h3></Name>
@@ -80,7 +87,7 @@ const Character = (props) => {
                     
                 </Basic>
                 <Flavor>
-                    This character has some flavor! They sure do.
+                    Well nevermind! I was trying to do some cool stuff with the rest of swapi, but it looks like the mock service won't let me send out normal get requests. Pretty frustrating.
                 </Flavor>
             </Info>
         </Card>
